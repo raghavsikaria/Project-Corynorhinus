@@ -1,11 +1,9 @@
-import numpy as np
 import json
 import random
 from typing import List
 from numpy import dot
 from numpy.linalg import norm
 import pickle
-from loguru import logger
 
 # CONSTANTS for FILE PATHS
 RELATIVE_PATH_TO_ID_EMBEDDING_MAPPING_PKL_FILE = 'processed_data/id_embedding_mapping.pkl'

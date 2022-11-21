@@ -2,19 +2,21 @@
 #
 #   Project: Project-Corynorhinus
 #   Author: Raghav Sikaria (raghav.sikaria@nyu.edu)
-#   Description: To test Sentence Transforomers in action
+#   Description: To see Sentence-Transformers in action
 #
 #########################################################
 
 from typing import List, Dict
 from fastapi import FastAPI, Path
-from fastapi.responses import StreamingResponse
 import uvicorn
 from pydantic import BaseModel, Field
 from loguru import logger
 
 from core.similar_tweets import get_n_nearest_tweets
 
+#########################################################
+## APP METADATA
+#########################################################
 
 app_description = """
 
@@ -44,6 +46,10 @@ tags_metadata = [
     }
 ]
 
+#########################################################
+## Initializing APP
+#########################################################
+
 app = FastAPI(
     title="Project-Corynorhinus",
     version="0.0.1",
@@ -51,6 +57,10 @@ app = FastAPI(
     openapi_tags=tags_metadata,
     swagger_ui_parameters={"defaultModelsExpandDepth": -1, "syntaxHighlist.theme": "obsidian"}
 )
+
+#########################################################
+## APP - VIEW FUNCTIONS
+#########################################################
 
 class SimilarTweets(BaseModel):
     cosine_similarity_score: float
@@ -84,5 +94,5 @@ async def get_similar_tweets(
     """
     return get_n_nearest_tweets(number_of_similar_tweets)
 
-if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0",port=5777)
+# if __name__ == "__main__":
+#     uvicorn.run(app, host="0.0.0.0",port=5777)
