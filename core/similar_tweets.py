@@ -2,8 +2,8 @@ import numpy as np
 import json
 import random
 from typing import List
-
-from sentence_transformers import util
+from numpy import dot
+from numpy.linalg import norm
 from loguru import logger
 
 # CONSTANTS for FILE PATHS
@@ -38,7 +38,7 @@ def find_cosine_similarity_score_with_other_tweets(chosen_tweet_id: int) -> List
     for tweet_id in all_tweet_ids:
         if tweet_id != str(chosen_tweet_id):
             embedding_of_candidate_tweet = id_to_embedding_map[int(tweet_id)]            
-            cosine_score = util.cos_sim(embedding_for_chosen_tweet_id, embedding_of_candidate_tweet)
+            cosine_score = dot(embedding_for_chosen_tweet_id, embedding_of_candidate_tweet)/(norm(embedding_for_chosen_tweet_id)*norm(embedding_of_candidate_tweet))
             cosine_scores.append([tweet_id, cosine_score])
     
     cosine_scores.sort(key = lambda x: x[1], reverse=True)
