@@ -7,7 +7,7 @@ from numpy.linalg import norm
 from loguru import logger
 
 # CONSTANTS for FILE PATHS
-RELATIVE_PATH_TO_ID_EMBEDDING_MAPPING_NPY_FILE = 'processed_data/id_embedding_mapping.npy'
+RELATIVE_PATH_TO_ID_EMBEDDING_MAPPING_NPY_FILE = 'processed_data/id_embedding_mapping_2.npy'
 RELATIVE_PATH_TO_ID_SENTENCE_MAPPING_JSON_FILE = 'processed_data/sentence_id_mapping.json'
 
 # READING AND STORING DATA IN MEMORY for faster processing for real time requests
