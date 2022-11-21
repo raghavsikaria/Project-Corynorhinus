@@ -22,8 +22,17 @@ app_description = """
 
 This is an API Documentation for Project-Corynorhinus. 
 
-It serves as a POC to test Sentence Transformers.
+It serves as a POC to test sentence embeddings from Sentence-Transformers. Due to storage limitations on HEROKU (the platform on which this APP is hosted), I have taken a dataset of only 297 tweets. Surprisingly, it does show some good results.
+
 The project tries to answer the question: Given a tweet, when you already have a dataset of tweets, find _k_ tweets which are contextually similar to the given tweet.
+
+##### How to try it out?
+Just head below to getSimilarTweets endpoint:
++ click on 'Try it out'
++ enter some number like "3" for the number of contexually similar tweets that we want [The number should be between 1 and 10]
++ hit on 'execute'
+
+Project Codebase has been hosted on GitHub [here](https://github.com/raghavsikaria/Project-Corynorhinus)
 
 Extending my gratitude to [Julian Parris](https://data.world/lovesdata) for publishing Donald Trump's Tweets DataSet [here](https://data.world/lovesdata/trump-tweets-5-4-09-12-5-16).
 """
@@ -75,5 +84,5 @@ async def get_similar_tweets(
     """
     return get_n_nearest_tweets(number_of_similar_tweets)
 
-# if __name__ == "__main__":
-#     uvicorn.run(app, host="0.0.0.0",port=5777)
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0",port=5777)

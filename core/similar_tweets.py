@@ -8,15 +8,11 @@ import pickle
 from loguru import logger
 
 # CONSTANTS for FILE PATHS
-# RELATIVE_PATH_TO_ID_EMBEDDING_MAPPING_NPY_FILE = 'processed_data/id_embedding_mapping_2.npy'
-RELATIVE_PATH_TO_ID_EMBEDDING_MAPPING_NPY_FILE = 'processed_data/data.pkl'
+RELATIVE_PATH_TO_ID_EMBEDDING_MAPPING_PKL_FILE = 'processed_data/id_embedding_mapping.pkl'
 RELATIVE_PATH_TO_ID_SENTENCE_MAPPING_JSON_FILE = 'processed_data/sentence_id_mapping.json'
 
 # READING AND STORING DATA IN MEMORY for faster processing for real time requests
-# id_to_embedding_map = np.load(RELATIVE_PATH_TO_ID_EMBEDDING_MAPPING_NPY_FILE, allow_pickle=True)
-# id_to_embedding_map = id_to_embedding_map[()]
-
-with open(RELATIVE_PATH_TO_ID_EMBEDDING_MAPPING_NPY_FILE, "rb") as fp:
+with open(RELATIVE_PATH_TO_ID_EMBEDDING_MAPPING_PKL_FILE, "rb") as fp:
     id_to_embedding_map = pickle.load(fp)
 
 with open(RELATIVE_PATH_TO_ID_SENTENCE_MAPPING_JSON_FILE) as f:
@@ -59,10 +55,7 @@ def get_n_nearest_tweets(n: int) -> dict:
     all_tweet_ids = [int(item_id) for item_id in list(id_to_tweet_map.keys())]
     minimum_tweet_id = min(all_tweet_ids)
     maximum_tweet_id = max(all_tweet_ids)
-    logger.info(f"minimum_tweet_id: {minimum_tweet_id}")
-    logger.info(f"maximum_tweet_id: {maximum_tweet_id}")
     chosen_tweet_id = get_a_random_tweet_id(minimum_tweet_id, maximum_tweet_id)
-    logger.info(f"chosen_tweet_id: {chosen_tweet_id}")
     all_cosine_scores = find_cosine_similarity_score_with_other_tweets(chosen_tweet_id)
     return {
         "randomly_selected_tweet": id_to_tweet_map[str(chosen_tweet_id)],
