@@ -76,4 +76,4 @@ async def get_similar_tweets(
     return get_n_nearest_tweets(number_of_similar_tweets)
 
 if __name__ == "__main__":
-    uvicorn.run(app)
+    uvicorn.run(app, host="0.0.0.0",port=5777)
